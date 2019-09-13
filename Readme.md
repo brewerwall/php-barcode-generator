@@ -1,11 +1,11 @@
-# PHP Barcode Generator [![Build Status](https://travis-ci.org/picqer/php-barcode-generator.svg?branch=master)](https://travis-ci.org/picqer/php-barcode-generator) [![Total Downloads](https://poser.pugx.org/picqer/php-barcode-generator/downloads)](https://packagist.org/packages/picqer/php-barcode-generator)
-This is an easy to use, non-bloated, framework independent, barcode generator in PHP.
+# PHP Barcode Generator
+This is an easy to use, non-bloated, framework independent, barcode generator in PHP.  This version has been updated to follow PSR-4 and work with PHP 7.1+.
 
 It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standards.
 
 *The codebase is largely from the [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) by Nicola Asuni. This code is therefor licensed under LGPLv3. It is still a bit of a mess, bit I will clean it in the future. I do not expect the interface of this class will change during the clean ups.*
 
-*This codebase, also extending off of [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) is a mostly direct copy from [Picqer barcode generator](https://github.com/picqer/php-barcode-generator).  Updated to be php 7+ compliant.*
+*This codebase, also extending off of [TCPDF barcode generator](https://github.com/tecnickcom/TCPDF) is a mostly direct copy from [Picqer barcode generator](https://github.com/picqer/php-barcode-generator).  Updated to be php 7.1+ compliant.*
 
 ## Installation
 Install through [composer](https://getcomposer.org/doc/00-intro.md):
