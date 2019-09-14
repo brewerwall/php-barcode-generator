@@ -2,9 +2,9 @@
 
 namespace Test\Unit;
 
-use Picqer\Barcode\BarcodeGenerator;
-use Picqer\Barcode\Constants\BarcodeRender;
-use Picqer\Barcode\Constants\BarcodeType;
+use Brewerwall\Barcode\BarcodeGenerator;
+use Brewerwall\Barcode\Constants\BarcodeRender;
+use Brewerwall\Barcode\Constants\BarcodeType;
 use Test\BaseTestCase;
 
 class PharmaCodeTwoTracksTest extends BaseTestCase
