@@ -1,4 +1,4 @@
-# PHP Barcode Generator
+# PHP Barcode Generator [![Build Status](https://travis-ci.org/brewerwall/php-barcode-generator.svg?branch=master)](https://travis-ci.org/brewerwall/php-barcode-generator) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/767119e854d7443b87a37ebc93697a42)](https://www.codacy.com/manual/Brewerwall/php-barcode-generator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brewerwall/php-barcode-generator&amp;utm_campaign=Badge_Grade)
 This is an easy to use, non-bloated, framework independent, barcode generator in PHP.  This version has been updated to follow PSR-4 and work with PHP 7.1+.
 
 It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standards.
