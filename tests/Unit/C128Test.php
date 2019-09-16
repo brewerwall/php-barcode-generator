@@ -5,6 +5,8 @@ namespace Test\Unit;
 use Brewerwall\Barcode\BarcodeGenerator;
 use Brewerwall\Barcode\Constants\BarcodeRender;
 use Brewerwall\Barcode\Constants\BarcodeType;
+use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
+use Brewerwall\Barcode\Exceptions\InvalidLengthException;
 use Test\BaseTestCase;
 
 class C128Test extends BaseTestCase
@@ -14,6 +16,14 @@ class C128Test extends BaseTestCase
     public function test_C128GeneratesJPGStructure()
     {
         $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
+        $generated = $generator->generate();
+
+        $this->assertContains('JPEG', $generated);
+    }
+
+    public function test_C128GeneratesJPGStructureWithNonNumericCode()
+    {
+        $generator = new BarcodeGenerator('0812|31723|897', BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
         $generated = $generator->generate();
 
         $this->assertContains('JPEG', $generated);
@@ -75,6 +85,14 @@ class C128Test extends BaseTestCase
         $this->assertContains('<svg', $generated);
     }
 
+    public function test_C128AThrowExceptionWithInvalidCharacters()
+    {
+        $this->expectException(InvalidCharacterException::class);
+
+        $generator = new BarcodeGenerator('0812|31723|897', BarcodeType::TYPE_CODE_128_A, BarcodeRender::RENDER_JPG);
+        $generator->generate();
+    }
+
     public function test_C128BGeneratesJPGStructure()
     {
         $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_128_B, BarcodeRender::RENDER_JPG);
@@ -106,7 +124,7 @@ class C128Test extends BaseTestCase
 
         $this->assertContains('<svg', $generated);
     }
-
+    
     public function test_C128CGeneratesJPGStructure()
     {
         $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_JPG);
@@ -137,5 +155,13 @@ class C128Test extends BaseTestCase
         $generated = $generator->generate();
 
         $this->assertContains('<svg', $generated);
+    }
+
+    public function test_C128CThrowExceptionWithUnevenCharacterLength()
+    {
+        $this->expectException(InvalidLengthException::class);
+
+        $generator = new BarcodeGenerator('81231723897', BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_JPG);
+        $generator->generate();
     }
 }

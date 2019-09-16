@@ -2,6 +2,9 @@
 
 namespace Brewerwall\Barcode\Types;
 
+use Brewerwall\Barcode\Exceptions\InvalidLengthException;
+use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
+
 class C128 extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
     /** @var string */
@@ -356,5 +359,48 @@ class C128 extends BarcodeTypeAbstract implements BarcodeTypeInterface
         }
 
         return $bararray;
+    }
+
+    /**
+     * Split text code in A/B sequence for 128 code.
+     *
+     * @param $code (string) code to split
+     *
+     * @return array sequence
+     * @protected
+     */
+    protected function get128ABsequence($code)
+    {
+        $len = strlen($code);
+        $sequence = array();
+        // get A sequences (if any)
+        $numseq = array();
+        preg_match_all('/([\x00-\x1f])/', $code, $numseq, PREG_OFFSET_CAPTURE);
+        if (isset($numseq[1]) and !empty($numseq[1])) {
+            $end_offset = 0;
+            foreach ($numseq[1] as $val) {
+                $offset = $val[1];
+                if ($offset > $end_offset) {
+                    // B sequence
+                    $sequence[] = array(
+                        'B',
+                        substr($code, $end_offset, ($offset - $end_offset)),
+                        ($offset - $end_offset),
+                    );
+                }
+                // A sequence
+                $slen = strlen($val[0]);
+                $sequence[] = array('A', substr($code, $offset, $slen), $slen);
+                $end_offset = $offset + $slen;
+            }
+            if ($end_offset < $len) {
+                $sequence[] = array('B', substr($code, $end_offset), ($len - $end_offset));
+            }
+        } else {
+            // only B sequence
+            $sequence[] = array('B', $code, $len);
+        }
+
+        return $sequence;
     }
 }
