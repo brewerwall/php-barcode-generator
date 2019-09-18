@@ -13,32 +13,32 @@ class Code93Test extends BaseTestCase
 
     public function test_Code93GeneratesJPGStructure()
     {
-        $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_JPG);
-        $generated = $generator->generate();
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_JPG);
+        $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertContains('JPEG', $generated);
     }
 
     public function test_Code93GeneratesPNGStructure()
     {
-        $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_PNG);
-        $generated = $generator->generate();
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_PNG);
+        $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertEquals('PNG', substr($generated, 1, 3));
     }
 
     public function test_Code93GeneratesHTMLStructure()
     {
-        $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_HTML);
-        $generated = $generator->generate();
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_HTML);
+        $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertContains('<div', $generated);
     }
 
     public function test_Code93GeneratesSVGStructure()
     {
-        $generator = new BarcodeGenerator(self::VALID_CODE, BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_SVG);
-        $generated = $generator->generate();
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_SVG);
+        $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertContains('<svg', $generated);
     }

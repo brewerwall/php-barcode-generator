@@ -9,20 +9,21 @@ class EanExt extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var int */
     protected $length;
 
-    public function __construct(string $code, int $length = 2)
+    public function __construct(int $length = 2)
     {
-        parent::__construct($code);
         $this->length = $length;
     }
 
     /**
      * Generate the EanExt data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_eanext($this->code, $this->length));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_eanext($code, $this->length));
     }
 
     /**

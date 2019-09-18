@@ -4,19 +4,6 @@ namespace Brewerwall\Barcode\Types;
 
 abstract class BarcodeTypeAbstract
 {
-    /** @var string */
-    protected $code;
-
-    /**
-     * Constructor.
-     *
-     * @param string $code
-     */
-    public function __construct(string $code)
-    {
-        $this->code = $code;
-    }
-
     /**
      * Checksum for standard 2 of 5 barcodes.
      *

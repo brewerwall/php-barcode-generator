@@ -9,11 +9,13 @@ class Codabar extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /**
      * Generate the Codabar data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_codabar($this->code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_codabar($code));
     }
 
     /**

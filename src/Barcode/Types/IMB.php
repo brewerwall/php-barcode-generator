@@ -9,11 +9,13 @@ class IMB extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /**
      * Generate the IMB data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_imb($this->code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_imb($code));
     }
 
     /**
