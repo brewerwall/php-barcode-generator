@@ -7,20 +7,21 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var bool */
     protected $isPlanet;
 
-    public function __construct(string $code, bool $isPlanet = false)
+    public function __construct(bool $isPlanet = false)
     {
-        parent::__construct($code);
         $this->isPlanet = $isPlanet;
     }
 
     /**
      * Generate the PostnetPlanet data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_postnet($this->code, $this->isPlanet));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_postnet($code, $this->isPlanet));
     }
 
     /**

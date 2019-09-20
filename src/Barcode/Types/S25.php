@@ -7,20 +7,21 @@ class S25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var bool */
     protected $hasChecksum;
 
-    public function __construct(string $code, bool $hasChecksum)
+    public function __construct(bool $hasChecksum)
     {
-        parent::__construct($code);
         $this->hasChecksum = $hasChecksum;
     }
 
     /**
      * Generate the S25 data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_s25($this->code, $this->hasChecksum));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_s25($code, $this->hasChecksum));
     }
 
     /**

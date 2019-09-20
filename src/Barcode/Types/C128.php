@@ -2,23 +2,29 @@
 
 namespace Brewerwall\Barcode\Types;
 
-use Brewerwall\Barcode\Exceptions\InvalidLengthException;
 use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
+use Brewerwall\Barcode\Exceptions\InvalidLengthException;
 
 class C128 extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
     /** @var string */
     protected $codeType;
 
-    public function __construct(string $code, string $codeType = '')
+    public function __construct(string $codeType = '')
     {
-        parent::__construct($code);
         $this->codeType = $codeType;
     }
 
-    public function generate(): array
+    /**
+     * Generatethe C128 data.
+     *
+     * @param string $code
+     *
+     * @return array
+     */
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_c128($this->code, $this->codeType));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_c128($code, $this->codeType));
     }
 
     /**

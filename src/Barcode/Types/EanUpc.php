@@ -2,28 +2,29 @@
 
 namespace Brewerwall\Barcode\Types;
 
-use Brewerwall\Barcode\Exceptions\InvalidCheckDigitException;
 use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
+use Brewerwall\Barcode\Exceptions\InvalidCheckDigitException;
 
 class EanUpc extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
     /** @var int */
     protected $length;
 
-    public function __construct(string $code, int $length)
+    public function __construct(int $length)
     {
-        parent::__construct($code);
         $this->length = $length;
     }
 
     /**
      * Generate the EanUpc data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_eanupc($this->code, $this->length));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_eanupc($code, $this->length));
     }
 
     /**

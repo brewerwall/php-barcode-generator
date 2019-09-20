@@ -9,11 +9,13 @@ class Code11 extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /**
      * Generate the Code11 data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_code11($this->code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_code11($code));
     }
 
     /**

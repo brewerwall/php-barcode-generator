@@ -19,9 +19,8 @@ class Code39 extends BarcodeTypeAbstract implements BarcodeTypeInterface
      * @param bool   $hasChecksum
      * @param bool   $isExtended
      */
-    public function __construct(string $code, bool $hasChecksum, bool $isExtended)
+    public function __construct(bool $hasChecksum, bool $isExtended)
     {
-        parent::__construct($code);
         $this->hasChecksum = $hasChecksum;
         $this->isExtended = $isExtended;
     }
@@ -29,11 +28,13 @@ class Code39 extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /**
      * Generate the Code39 data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_code39($this->code, $this->isExtended, $this->hasChecksum));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_code39($code, $this->isExtended, $this->hasChecksum));
     }
 
     /**

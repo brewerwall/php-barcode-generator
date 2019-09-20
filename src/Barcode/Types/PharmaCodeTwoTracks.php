@@ -7,11 +7,13 @@ class PharmaCodeTwoTracks extends BarcodeTypeAbstract implements BarcodeTypeInte
     /**
      * Generate the PharmaCodeTwoTracks data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_pharmacode2t($this->code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_pharmacode2t($code));
     }
 
     /**

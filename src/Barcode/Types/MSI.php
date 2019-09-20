@@ -9,20 +9,21 @@ class MSI extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var bool */
     protected $hasChecksum;
 
-    public function __construct(string $code, bool $hasChecksum = false)
+    public function __construct(bool $hasChecksum = false)
     {
-        parent::__construct($code);
         $this->hasChecksum = $hasChecksum;
     }
 
     /**
      * Generate the MSI data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_msi($this->code, $this->hasChecksum));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_msi($code, $this->hasChecksum));
     }
 
     /**

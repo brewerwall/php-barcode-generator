@@ -9,20 +9,21 @@ class I25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var bool */
     protected $hasChecksum;
 
-    public function __construct(string $code, bool $hasChecksum)
+    public function __construct(bool $hasChecksum)
     {
-        parent::__construct($code);
         $this->hasChecksum = $hasChecksum;
     }
 
     /**
      * Generate the I25 data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_i25($this->code, $this->hasChecksum));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_i25($code, $this->hasChecksum));
     }
 
     /**

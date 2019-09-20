@@ -1,4 +1,4 @@
-# PHP Barcode Generator [![Build Status](https://travis-ci.org/brewerwall/php-barcode-generator.svg?branch=master)](https://travis-ci.org/brewerwall/php-barcode-generator) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/767119e854d7443b87a37ebc93697a42)](https://www.codacy.com/manual/Brewerwall/php-barcode-generator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brewerwall/php-barcode-generator&amp;utm_campaign=Badge_Grade)
+# <img src="https://user-images.githubusercontent.com/632330/57006043-fb823800-6ba2-11e9-8fa9-eba94b8011b5.png" width="30px"/>  PHP Barcode Generator<br/>[![Build Status](https://travis-ci.org/brewerwall/php-barcode-generator.svg?branch=master)](https://travis-ci.org/brewerwall/php-barcode-generator) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/767119e854d7443b87a37ebc93697a42)](https://www.codacy.com/manual/Brewerwall/php-barcode-generator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brewerwall/php-barcode-generator&amp;utm_campaign=Badge_Grade)
 This is an easy to use, non-bloated, framework independent, barcode generator in PHP.  This version has been updated to follow PSR-4 and work with PHP 7.1+.
 
 It creates SVG, PNG, JPG and HTML images, from the most used 1D barcode standards.
@@ -22,19 +22,20 @@ Using IMB Barcodes require `bcmath` extension to be installed as well.
 Create a new barcode generator.  This will declare the code, the type of barcode and what format the code will be rendered.
 
 ```php
-$generator = new BarcodeGenerator('012345678', BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
+$generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
 
-// Generates our default barcode with width=2, height=30, color=#000000
-$generated = $generator->generate();
+// Generate our code
+$generated = $generator->generate('012345678');
 
 // Generates the same code with style updates
-$generated = $generator->generate(4, 50, '#FFCC33');
+$generated = $generator->generate('012345678', 4, 50, '#FFCC33');
 ```
 
-The `$generator->generate()` method accepts the following:
-- $widthFactor (default: 2) Width is based on the length of the data, with this factor you can make the barcode bars wider than default
-- $totalHeight (default: 30) The total height of the barcode
-- $color (default: #000000) Hex code of the foreground color
+The `$generator->generate()` method accepts the following parameters:
+- `$code` Barcode value we need to generate.
+- `$widthFactor` (default: 2) Width is based on the length of the data, with this factor you can make the barcode bars wider than default
+- `$totalHeight` (default: 30) The total height of the barcode
+- `$color` (default: #000000) Hex code of the foreground color
 
 ## Image types
 ```php
@@ -86,6 +87,6 @@ BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS
 Embedded PNG image in HTML:
 
 ```php
-$generator = new BarcodeGenerator('012345678', BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
-echo '<img src="data:image/png;base64,' . base64_encode($generator->generate()) . '">';
+$generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_PNG);
+echo '<img src="data:image/png;base64,' . base64_encode($generator->generate('012345678')) . '">';
 ```

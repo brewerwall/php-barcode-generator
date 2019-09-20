@@ -7,11 +7,13 @@ class PharmaCode extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /**
      * Generate the PharmaCode data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_pharmacode($this->code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_pharmacode($code));
     }
 
     /**

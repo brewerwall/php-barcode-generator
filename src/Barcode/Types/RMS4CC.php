@@ -7,20 +7,21 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
     /** @var bool */
     protected $isKix;
 
-    public function __construct(string $code, bool $isKix = false)
+    public function __construct(bool $isKix = false)
     {
-        parent::__construct($code);
         $this->isKix = $isKix;
     }
 
     /**
      * Generate the RMS4CC data.
      *
+     * @param string $code
+     *
      * @return array
      */
-    public function generate(): array
+    public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_rms4cc($this->code, $this->isKix));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_rms4cc($code, $this->isKix));
     }
 
     /**
