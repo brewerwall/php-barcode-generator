@@ -23,7 +23,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_2, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean2.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean2.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt2GeneratesPNGStructure()
@@ -38,7 +38,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_2, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean2.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean2.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt2GeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_2, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean2.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean2.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt2GeneratesSVGStructure()
@@ -68,7 +68,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_2, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean2.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean2.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt5GeneratesJPGStructure()
@@ -83,7 +83,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_5, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean5.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean5.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt5GeneratesPNGStructure()
@@ -98,7 +98,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_5, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean5.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean5.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt5GeneratesHTMLStructure()
@@ -113,7 +113,7 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_5, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean5.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean5.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_EanExt5GeneratesSVGStructure()
@@ -128,6 +128,6 @@ class EanExtTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_5, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean5.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean5.svg'), $generator->generate(self::VALID_CODE));
     }
 }

@@ -23,7 +23,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25GeneratesPNGStructure()
@@ -38,7 +38,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25GeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25GeneratesSVGStructure()
@@ -68,7 +68,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25ChecksumGeneratesJPGStructure()
@@ -83,7 +83,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5_CHECKSUM, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25Checksum.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25Checksum.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25ChecksumGeneratesPNGStructure()
@@ -98,7 +98,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5_CHECKSUM, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25Checksum.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25Checksum.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25ChecksumGeneratesHTMLStructure()
@@ -113,7 +113,7 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5_CHECKSUM, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25Checksum.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25Checksum.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_S25ChecksumGeneratesSVGStructure()
@@ -128,6 +128,6 @@ class S25Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_STANDARD_2_5_CHECKSUM, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/S25Checksum.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/S25Checksum.svg'), $generator->generate(self::VALID_CODE));
     }
 }

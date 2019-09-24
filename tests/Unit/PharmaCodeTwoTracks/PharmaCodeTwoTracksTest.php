@@ -23,7 +23,7 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCodeTwoTracks.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeTwoTracksGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCodeTwoTracks.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeTwoTracksGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCodeTwoTracks.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeTwoTracksGeneratesSVGStructure()
@@ -68,6 +68,6 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCodeTwoTracks.svg'), $generator->generate(self::VALID_CODE));
     }
 }

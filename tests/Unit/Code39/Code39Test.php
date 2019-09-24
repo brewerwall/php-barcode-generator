@@ -23,7 +23,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39GeneratesPNGStructure()
@@ -38,7 +38,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39GeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39GeneratesSVGStructure()
@@ -68,7 +68,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedGeneratesJPGStructure()
@@ -83,7 +83,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39E.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39E.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedGeneratesPNGStructure()
@@ -98,7 +98,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39E.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39E.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedGeneratesHTMLStructure()
@@ -113,7 +113,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39E.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39E.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedGeneratesSVGStructure()
@@ -128,7 +128,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39E.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39E.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ChecksumGeneratesJPGStructure()
@@ -143,7 +143,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39_CHECKSUM, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39Checksum.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39Checksum.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ChecksumGeneratesPNGStructure()
@@ -158,7 +158,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39_CHECKSUM, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39Checksum.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39Checksum.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ChecksumGeneratesHTMLStructure()
@@ -173,7 +173,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39_CHECKSUM, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39Checksum.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39Checksum.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ChecksumGeneratesSVGStructure()
@@ -188,7 +188,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39_CHECKSUM, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39Checksum.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39Checksum.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedChecksumGeneratesJPGStructure()
@@ -203,7 +203,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E_CHECKSUM, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39EChecksum.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39EChecksum.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedChecksumGeneratesPNGStructure()
@@ -218,7 +218,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E_CHECKSUM, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39EChecksum.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39EChecksum.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedChecksumGeneratesHTMLStructure()
@@ -233,7 +233,7 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E_CHECKSUM, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39EChecksum.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39EChecksum.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code39ExtendedChecksumGeneratesSVGStructure()
@@ -248,6 +248,6 @@ class Code39Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_39E_CHECKSUM, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code39EChecksum.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code39EChecksum.svg'), $generator->generate(self::VALID_CODE));
     }
 }

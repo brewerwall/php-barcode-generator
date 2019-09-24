@@ -23,7 +23,7 @@ class Code93Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code93.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code93.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code93GeneratesPNGStructure()
@@ -38,7 +38,7 @@ class Code93Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code93.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code93.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code93GeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class Code93Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code93.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code93.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_Code93GeneratesSVGStructure()
@@ -68,6 +68,6 @@ class Code93Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_93, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Code93.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Code93.svg'), $generator->generate(self::VALID_CODE));
     }
 }

@@ -23,7 +23,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Msi.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Msi.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Msi.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Msi.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Msi.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Msi.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIGeneratesSVGStructure()
@@ -68,7 +68,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Msi.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Msi.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIChecksumGeneratesJPGStructure()
@@ -83,7 +83,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI_CHECKSUM, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/MsiChecksum.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/MsiChecksum.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIChecksumGeneratesPNGStructure()
@@ -98,7 +98,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI_CHECKSUM, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/MsiChecksum.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/MsiChecksum.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIChecksumGeneratesHTMLStructure()
@@ -113,7 +113,7 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI_CHECKSUM, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/MsiChecksum.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/MsiChecksum.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_MSIChecksumGeneratesSVGStructure()
@@ -128,6 +128,6 @@ class MSITest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_MSI_CHECKSUM, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/MsiChecksum.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/MsiChecksum.svg'), $generator->generate(self::VALID_CODE));
     }
 }

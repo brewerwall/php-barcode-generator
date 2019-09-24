@@ -23,7 +23,7 @@ class PharmaCodeTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCode.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCode.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class PharmaCodeTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCode.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCode.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class PharmaCodeTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCode.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCode.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeGeneratesSVGStructure()
@@ -68,6 +68,6 @@ class PharmaCodeTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCode.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/PharmaCode.svg'), $generator->generate(self::VALID_CODE));
     }
 }

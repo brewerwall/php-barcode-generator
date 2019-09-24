@@ -23,7 +23,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_RMS4CC, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Rms4cc.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Rms4cc.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_RMS4CC, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Rms4cc.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Rms4cc.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_RMS4CC, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Rms4cc.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Rms4cc.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCGeneratesSVGStructure()
@@ -68,7 +68,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_RMS4CC, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Rms4cc.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Rms4cc.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCKixGeneratesJPGStructure()
@@ -83,7 +83,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_KIX, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Kix.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Kix.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCKixGeneratesPNGStructure()
@@ -98,7 +98,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_KIX, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Kix.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Kix.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCKixGeneratesHTMLStructure()
@@ -113,7 +113,7 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_KIX, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Kix.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Kix.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_RMS4CCKixGeneratesSVGStructure()
@@ -128,6 +128,6 @@ class RMS4CCTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_KIX, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Kix.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Kix.svg'), $generator->generate(self::VALID_CODE));
     }
 }

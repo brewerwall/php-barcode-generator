@@ -23,7 +23,7 @@ class IMBTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_IMB, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Imb.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Imb.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_IMBGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class IMBTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_IMB, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Imb.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Imb.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_IMBGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class IMBTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_IMB, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Imb.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Imb.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_IMBGeneratesSVGStructure()
@@ -68,6 +68,6 @@ class IMBTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_IMB, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Imb.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Imb.svg'), $generator->generate(self::VALID_CODE));
     }
 }

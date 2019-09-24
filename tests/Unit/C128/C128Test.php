@@ -25,7 +25,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128GeneratesJPGStructureWithNonNumericCode()
@@ -48,7 +48,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128GeneratesHTMLStructure()
@@ -63,7 +63,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128GeneratesSVGStructure()
@@ -78,7 +78,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128AGeneratesJPGStructure()
@@ -93,7 +93,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_A, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128A.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128A.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128AGeneratesPNGStructure()
@@ -108,7 +108,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_A, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128A.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128A.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128AGeneratesHTMLStructure()
@@ -123,7 +123,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_A, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128A.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128A.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128AGeneratesSVGStructure()
@@ -138,7 +138,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_A, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128A.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128A.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128AThrowExceptionWithInvalidCharacters()
@@ -161,7 +161,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_B, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128B.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128B.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128BGeneratesPNGStructure()
@@ -176,7 +176,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_B, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128B.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128B.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128BGeneratesHTMLStructure()
@@ -191,7 +191,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_B, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128B.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128B.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128BGeneratesSVGStructure()
@@ -206,7 +206,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_B, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128B.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128B.svg'), $generator->generate(self::VALID_CODE));
     }
     
     public function test_C128CGeneratesJPGStructure()
@@ -221,7 +221,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128C.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128C.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128CGeneratesPNGStructure()
@@ -236,7 +236,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128C.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128C.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128CGeneratesHTMLStructure()
@@ -251,7 +251,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128C.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128C.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128CGeneratesSVGStructure()
@@ -266,7 +266,7 @@ class C128Test extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODE_128_C, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/C128C.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/C128C.svg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_C128CThrowExceptionWithUnevenCharacterLength()

@@ -23,7 +23,7 @@ class CodabarTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODABAR, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Codabar.jpg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Codabar.jpg'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_CodabarGeneratesPNGStructure()
@@ -38,7 +38,7 @@ class CodabarTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODABAR, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Codabar.png'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Codabar.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_CodabarGeneratesHTMLStructure()
@@ -53,7 +53,7 @@ class CodabarTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODABAR, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Codabar.html'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Codabar.html'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_CodabarGeneratesSVGStructure()
@@ -68,6 +68,6 @@ class CodabarTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_CODABAR, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Codabar.svg'), $generator->generate(self::VALID_CODE));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Codabar.svg'), $generator->generate(self::VALID_CODE));
     }
 }

@@ -26,7 +26,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_8, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean8.jpg'), $generator->generate(self::VALID_CODE_EAN_8));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean8.jpg'), $generator->generate(self::VALID_CODE_EAN_8));
     }
 
     public function test_EanUpc8GeneratesPNGStructure()
@@ -41,7 +41,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_8, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean8.png'), $generator->generate(self::VALID_CODE_EAN_8));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean8.png'), $generator->generate(self::VALID_CODE_EAN_8));
     }
 
     public function test_EanUpc8GeneratesHTMLStructure()
@@ -56,7 +56,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_8, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean8.html'), $generator->generate(self::VALID_CODE_EAN_8));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean8.html'), $generator->generate(self::VALID_CODE_EAN_8));
     }
 
     public function test_EanUpc8GeneratesSVGStructure()
@@ -71,7 +71,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_8, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean8.svg'), $generator->generate(self::VALID_CODE_EAN_8));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean8.svg'), $generator->generate(self::VALID_CODE_EAN_8));
     }
 
     public function test_EanUpc13GeneratesJPGStructure()
@@ -86,7 +86,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_13, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean13.jpg'), $generator->generate(self::VALID_CODE_EAN_13));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean13.jpg'), $generator->generate(self::VALID_CODE_EAN_13));
     }
 
     public function test_EanUpc13GeneratesPNGStructure()
@@ -101,7 +101,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_13, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean13.png'), $generator->generate(self::VALID_CODE_EAN_13));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean13.png'), $generator->generate(self::VALID_CODE_EAN_13));
     }
 
     public function test_EanUpc13GeneratesHTMLStructure()
@@ -116,7 +116,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_13, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean13.html'), $generator->generate(self::VALID_CODE_EAN_13));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean13.html'), $generator->generate(self::VALID_CODE_EAN_13));
     }
 
     public function test_EanUpc13GeneratesSVGStructure()
@@ -131,7 +131,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_EAN_13, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/Ean13.svg'), $generator->generate(self::VALID_CODE_EAN_13));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/Ean13.svg'), $generator->generate(self::VALID_CODE_EAN_13));
     }
 
     public function test_EanUpcAGeneratesJPGStructure()
@@ -146,7 +146,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_A, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcA.jpg'), $generator->generate(self::VALID_CODE_UPC_A));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcA.jpg'), $generator->generate(self::VALID_CODE_UPC_A));
     }
 
     public function test_EanUpcAGeneratesPNGStructure()
@@ -161,7 +161,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_A, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcA.png'), $generator->generate(self::VALID_CODE_UPC_A));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcA.png'), $generator->generate(self::VALID_CODE_UPC_A));
     }
 
     public function test_EanUpcAGeneratesHTMLStructure()
@@ -176,7 +176,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_A, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcA.html'), $generator->generate(self::VALID_CODE_UPC_A));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcA.html'), $generator->generate(self::VALID_CODE_UPC_A));
     }
 
     public function test_EanUpcAGeneratesSVGStructure()
@@ -191,7 +191,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_A, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcA.svg'), $generator->generate(self::VALID_CODE_UPC_A));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcA.svg'), $generator->generate(self::VALID_CODE_UPC_A));
     }
 
     public function test_EanUpcEGeneratesJPGStructure()
@@ -206,7 +206,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_E, BarcodeRender::RENDER_JPG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcE.jpg'), $generator->generate(self::VALID_CODE_UPC_E));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcE.jpg'), $generator->generate(self::VALID_CODE_UPC_E));
     }
 
     public function test_EanUpcEGeneratesPNGStructure()
@@ -221,7 +221,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_E, BarcodeRender::RENDER_PNG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcE.png'), $generator->generate(self::VALID_CODE_UPC_E));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcE.png'), $generator->generate(self::VALID_CODE_UPC_E));
     }
 
     public function test_EanUpcEGeneratesHTMLStructure()
@@ -236,7 +236,7 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_E, BarcodeRender::RENDER_HTML);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcE.html'), $generator->generate(self::VALID_CODE_UPC_E));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcE.html'), $generator->generate(self::VALID_CODE_UPC_E));
     }
 
     public function test_EanUpcEGeneratesSVGStructure()
@@ -251,6 +251,6 @@ class EanUpcTest extends BaseTestCase
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_UPC_E, BarcodeRender::RENDER_SVG);
         
-        $this->assertEquals(file_get_contents(__DIR__.'/data/UpcE.svg'), $generator->generate(self::VALID_CODE_UPC_E));
+        $this->assertEquals($this->getFileContents(__DIR__.'/data/UpcE.svg'), $generator->generate(self::VALID_CODE_UPC_E));
     }
 }
