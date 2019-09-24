@@ -19,12 +19,26 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
         $this->assertContains('JPEG', $generated);
     }
 
+    public function test_PharmaCodeTwoTracksGeneratesJPGFile()
+    {
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_JPG);
+        
+        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.jpg'), $generator->generate(self::VALID_CODE));
+    }
+
     public function test_PharmaCodeTwoTracksGeneratesPNGStructure()
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_PNG);
         $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertEquals('PNG', substr($generated, 1, 3));
+    }
+
+    public function test_PharmaCodeTwoTracksGeneratesPNGFile()
+    {
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_PNG);
+        
+        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.png'), $generator->generate(self::VALID_CODE));
     }
 
     public function test_PharmaCodeTwoTracksGeneratesHTMLStructure()
@@ -35,11 +49,25 @@ class PharmaCodeTwoTracksTest extends BaseTestCase
         $this->assertContains('<div', $generated);
     }
 
+    public function test_PharmaCodeTwoTracksGeneratesHTMLFile()
+    {
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_HTML);
+        
+        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.html'), $generator->generate(self::VALID_CODE));
+    }
+
     public function test_PharmaCodeTwoTracksGeneratesSVGStructure()
     {
         $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_SVG);
         $generated = $generator->generate(self::VALID_CODE);
 
         $this->assertContains('<svg', $generated);
+    }
+
+    public function test_PharmaCodeTwoTracksGeneratesSVGFile()
+    {
+        $generator = new BarcodeGenerator(BarcodeType::TYPE_PHARMA_CODE_TWO_TRACKS, BarcodeRender::RENDER_SVG);
+        
+        $this->assertEquals(file_get_contents(__DIR__.'/data/PharmaCodeTwoTracks.svg'), $generator->generate(self::VALID_CODE));
     }
 }
