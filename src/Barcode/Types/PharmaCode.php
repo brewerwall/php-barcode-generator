@@ -4,6 +4,10 @@ namespace Brewerwall\Barcode\Types;
 
 class PharmaCode extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const SEQUENCE_EVEN = '11100';
+
+    const SEQUENCE_ODD = '100';
+
     /**
      * Generate the PharmaCode data.
      *
@@ -13,7 +17,7 @@ class PharmaCode extends BarcodeTypeAbstract implements BarcodeTypeInterface
      */
     public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_pharmacode($code));
+        return $this->convertBarcodeArrayToNewStyle($this->barcodePharmacode($code));
     }
 
     /**
@@ -24,24 +28,24 @@ class PharmaCode extends BarcodeTypeAbstract implements BarcodeTypeInterface
      *
      * @return array barcode representation
      */
-    protected function barcode_pharmacode(string $code): array
+    protected function barcodePharmacode(string $code): array
     {
-        $seq = '';
+        $sequence = '';
         $code = intval($code);
         while ($code > 0) {
-            if (0 == ($code % 2)) {
-                $seq .= '11100';
+            if (0 === ($code % 2)) {
+                $sequence .= self::SEQUENCE_EVEN;
                 $code -= 2;
             } else {
-                $seq .= '100';
+                $sequence .= self::SEQUENCE_ODD;
                 --$code;
             }
             $code /= 2;
         }
-        $seq = substr($seq, 0, -2);
-        $seq = strrev($seq);
-        $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
+        $sequence = substr($sequence, 0, -2);
+        $sequence = strrev($sequence);
+        $bar = $this->getBaseBar((string) $code);
 
-        return $this->binarySequenceToArray($seq, $bararray);
+        return $this->binarySequenceToArray($sequence, $bar);
     }
 }
