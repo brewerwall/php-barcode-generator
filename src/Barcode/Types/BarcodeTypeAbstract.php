@@ -5,6 +5,18 @@ namespace Brewerwall\Barcode\Types;
 abstract class BarcodeTypeAbstract
 {
     /**
+     * Get the Base Bar Structure.
+     *
+     * @param string $code
+     *
+     * @return array
+     */
+    protected function getBaseBar(string $code): array
+    {
+        return ['code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => []];
+    }
+
+    /**
      * Checksum for standard 2 of 5 barcodes.
      *
      * @param string $code code to process
