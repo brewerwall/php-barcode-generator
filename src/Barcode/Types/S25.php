@@ -4,6 +4,23 @@ namespace Brewerwall\Barcode\Types;
 
 class S25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const CHR = [
+        '0' => '10101110111010',
+        '1' => '11101010101110',
+        '2' => '10111010101110',
+        '3' => '11101110101010',
+        '4' => '10101110101110',
+        '5' => '11101011101010',
+        '6' => '10111011101010',
+        '7' => '10101011101110',
+        '8' => '10101110111010',
+        '9' => '10111010111010',
+    ];
+
+    const SEQUENCE_START = '11011010';
+
+    const SEQUENCE_END = '1101011';
+
     /** @var bool */
     protected $hasChecksum;
 
@@ -36,36 +53,27 @@ class S25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
      */
     protected function barcode_s25(string $code, bool $checksum = false): array
     {
-        $chr['0'] = '10101110111010';
-        $chr['1'] = '11101010101110';
-        $chr['2'] = '10111010101110';
-        $chr['3'] = '11101110101010';
-        $chr['4'] = '10101110101110';
-        $chr['5'] = '11101011101010';
-        $chr['6'] = '10111011101010';
-        $chr['7'] = '10101011101110';
-        $chr['8'] = '10101110111010';
-        $chr['9'] = '10111010111010';
         if ($checksum) {
-            // add checksum
             $code .= $this->checksum_s25($code);
         }
+
+        // add leading zero if code-length is odd
         if (0 != (strlen($code) % 2)) {
-            // add leading zero if code-length is odd
             $code = '0'.$code;
         }
-        $seq = '11011010';
-        $clen = strlen($code);
-        for ($i = 0; $i < $clen; ++$i) {
-            $digit = $code[$i];
-            if (!isset($chr[$digit])) {
+
+        $sequence = self::SEQUENCE_START;
+
+        for ($stringIndex = 0; $stringIndex < strlen($code); ++$stringIndex) {
+            $digit = $code[$stringIndex];
+            if (!isset(self::CHR[$digit])) {
                 throw new InvalidCharacterException('Char '.$digit.' is unsupported');
             }
-            $seq .= $chr[$digit];
+            $sequence .= self::CHR[$digit];
         }
-        $seq .= '1101011';
-        $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 
-        return $this->binseq_to_array($seq, $bararray);
+        $sequence .= self::SEQUENCE_END;
+
+        return $this->binarySequenceToArray($sequence, $this->getBaseBar($code));
     }
 }

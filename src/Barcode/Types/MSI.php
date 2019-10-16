@@ -84,6 +84,6 @@ class MSI extends BarcodeTypeAbstract implements BarcodeTypeInterface
         $seq .= '1001'; // right guard
         $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 
-        return $this->binseq_to_array($seq, $bararray);
+        return $this->binarySequenceToArray($seq, $bararray);
     }
 }
