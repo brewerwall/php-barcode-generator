@@ -63,11 +63,7 @@ class Codabar extends BarcodeTypeAbstract implements BarcodeTypeInterface
             }
 
             for ($j = 0; $j < 8; ++$j) {
-                $t = false; // spaces
-                if (0 == ($j % 2)) {
-                    $t = true; // bar
-                }
-                $bar['bcode'][++$k] = ['t' => $t, 'w' => self::CHR[$code[$i]][$j], 'h' => 1, 'p' => 0];
+                $bar['bcode'][++$k] = ['t' => (0 === ($j % 2)), 'w' => self::CHR[$code[$i]][$j], 'h' => 1, 'p' => 0];
                 $bar['maxw'] += self::CHR[$code[$i]][$j];
             }
         }
