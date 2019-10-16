@@ -50,7 +50,7 @@ abstract class BarcodeTypeAbstract
      *
      * @return array barcode representation
      */
-    protected function binseq_to_array(string $seq, array $bararray): array
+    protected function binarySequenceToArray(string $seq, array $bararray): array
     {
         $len = strlen($seq);
         $w = 0;

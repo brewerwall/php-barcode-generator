@@ -42,6 +42,6 @@ class PharmaCode extends BarcodeTypeAbstract implements BarcodeTypeInterface
         $seq = strrev($seq);
         $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 
-        return $this->binseq_to_array($seq, $bararray);
+        return $this->binarySequenceToArray($seq, $bararray);
     }
 }
