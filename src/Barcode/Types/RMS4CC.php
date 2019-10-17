@@ -120,20 +120,10 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
         $bar = $this->getBaseBar($code, self::MAXH);
 
         if (!$this->isKix) {
-            // table for checksum calculation (row,col)
-            $row = 0;
-            $col = 0;
-            for ($i = 0; $i < $codeLength; ++$i) {
-                $row += self::CHECKTABLE[$code[$i]][0];
-                $col += self::CHECKTABLE[$code[$i]][1];
-            }
-            $row %= 6;
-            $col %= 6;
-            $chk = array_keys(self::CHECKTABLE, [$row, $col]);
-            $code .= $chk[0];
+            $code .= $this->getCheckTableKey($code);
             ++$codeLength;
         }
-        
+
         $k = 0;
 
         if (!$this->isKix) {
@@ -160,6 +150,13 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
         return $bar;
     }
 
+    /**
+     * Gets Bar Mode.
+     *
+     * @param int $mode
+     *
+     * @return array
+     */
     private function getBarMode(int $mode): array
     {
         switch ($mode) {
@@ -185,5 +182,27 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
         }
 
         return ['t' => 1, 'w' => 1, 'h' => $h, 'p' => $p];
+    }
+
+    /**
+     * Gets Check Table Key.
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    private function getCheckTableKey(string $code): string
+    {
+        $row = 0;
+        $col = 0;
+        for ($i = 0; $i < strlen($code); ++$i) {
+            $row += self::CHECKTABLE[$code[$i]][0];
+            $col += self::CHECKTABLE[$code[$i]][1];
+        }
+        $row %= 6;
+        $col %= 6;
+        $chk = array_keys(self::CHECKTABLE, [$row, $col]);
+
+        return $chk[0];
     }
 }
