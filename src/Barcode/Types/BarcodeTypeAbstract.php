@@ -11,9 +11,9 @@ abstract class BarcodeTypeAbstract
      *
      * @return array
      */
-    protected function getBaseBar(string $code): array
+    protected function getBaseBar(string $code, $maxh = 1): array
     {
-        return ['code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => []];
+        return ['code' => $code, 'maxw' => 0, 'maxh' => $maxh, 'bcode' => []];
     }
 
     /**
