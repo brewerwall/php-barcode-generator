@@ -116,14 +116,14 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
     protected function barcode_rms4cc(string $code): array
     {
         $code = strtoupper($code);
-        $len = strlen($code);
+        $codeLength = strlen($code);
         $bar = $this->getBaseBar($code, self::MAXH);
 
         if (!$this->isKix) {
             // table for checksum calculation (row,col)
             $row = 0;
             $col = 0;
-            for ($i = 0; $i < $len; ++$i) {
+            for ($i = 0; $i < $codeLength; ++$i) {
                 $row += self::CHECKTABLE[$code[$i]][0];
                 $col += self::CHECKTABLE[$code[$i]][1];
             }
@@ -131,8 +131,9 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
             $col %= 6;
             $chk = array_keys(self::CHECKTABLE, [$row, $col]);
             $code .= $chk[0];
-            ++$len;
+            ++$codeLength;
         }
+        
         $k = 0;
 
         if (!$this->isKix) {
@@ -142,30 +143,9 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
             $bar['maxw'] += 2;
         }
 
-        for ($i = 0; $i < $len; ++$i) {
+        for ($i = 0; $i < $codeLength; ++$i) {
             for ($j = 0; $j < 4; ++$j) {
-                switch (self::BARMODE[$code[$i]][$j]) {
-                    case 1:
-                        $p = 0;
-                        $h = 2;
-                        break;
-
-                    case 2:
-                        $p = 0;
-                        $h = 3;
-                        break;
-
-                    case 3:
-                        $p = 1;
-                        $h = 1;
-                        break;
-
-                    case 4:
-                        $p = 1;
-                        $h = 2;
-                        break;
-                }
-                $bar['bcode'][$k++] = ['t' => 1, 'w' => 1, 'h' => $h, 'p' => $p];
+                $bar['bcode'][$k++] = $this->getBarMode(self::BARMODE[$code[$i]][$j]);
                 $bar['bcode'][$k++] = ['t' => 0, 'w' => 1, 'h' => 2, 'p' => 0];
                 $bar['maxw'] += 2;
             }
@@ -178,5 +158,32 @@ class RMS4CC extends BarcodeTypeAbstract implements BarcodeTypeInterface
         }
 
         return $bar;
+    }
+
+    private function getBarMode(int $mode): array
+    {
+        switch ($mode) {
+            case 1:
+                $p = 0;
+                $h = 2;
+                break;
+
+            case 2:
+                $p = 0;
+                $h = 3;
+                break;
+
+            case 3:
+                $p = 1;
+                $h = 1;
+                break;
+
+            case 4:
+                $p = 1;
+                $h = 2;
+                break;
+        }
+
+        return ['t' => 1, 'w' => 1, 'h' => $h, 'p' => $p];
     }
 }
