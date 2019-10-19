@@ -84,9 +84,9 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
         // fill bars
         for ($i = 0; $i < strlen($code); ++$i) {
             for ($j = 0; $j < 5; ++$j) {
-                $h = $this->getBarLengthValue($code[$i], $j);
-                $p = floor(1 / $h);
-                $bar['bcode'][$iterator++] = $this->getCustomLineStart($h, $p);
+                $height = $this->getBarLengthValue($code[$i], $j);
+                $point = floor(1 / $height);
+                $bar['bcode'][$iterator++] = $this->getCustomLineStart($height, $point);
                 $bar['bcode'][$iterator++] = self::LINE_END;
                 $bar['maxw'] += self::MAXW_INCREMENT;
             }
@@ -109,7 +109,7 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
     private function getCheckedValue(string $code): int
     {
         $sum = array_reduce(str_split($code), function ($carry, $character) {
-            return $carry += intval($character);
+            return $carry += (int)$character;
         });
 
         if ($checked = ($sum % 10) > 0) {
@@ -136,11 +136,11 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
         return self::BARLENGTH_DEFAULT[$firstLevel][$ssecondLevel];
     }
 
-    private function getCustomLineStart(int $h, float $p): array
+    private function getCustomLineStart(int $height, float $point): array
     {
         $line = self::LINE_START;
-        $line['h'] = $h;
-        $line['p'] = $p;
+        $line['h'] = $height;
+        $line['p'] = $point;
 
         return $line;
     }
