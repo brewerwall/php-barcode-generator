@@ -6,6 +6,25 @@ use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
 
 class I25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const CHARACTER = [
+        '0' => '11221',
+        '1' => '21112',
+        '2' => '12112',
+        '3' => '22111',
+        '4' => '11212',
+        '5' => '21211',
+        '6' => '12211',
+        '7' => '11122',
+        '8' => '21121',
+        '9' => '12121',
+        'A' => '11',
+        'Z' => '21',
+    ];
+
+    const START_CODE = 'AA';
+
+    const STOP_CODE = 'ZA';
+
     /** @var bool */
     protected $hasChecksum;
 
@@ -31,65 +50,61 @@ class I25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
      * Compact numeric code, widely used in industry, air cargo
      * Contains digits (0 to 9) and encodes the data in the width of both bars and spaces.
      *
-     * @param string $code     code to represent
-     * @param bool   $checksum if true add a checksum to the code
+     * @param string $code code to represent
      *
      * @return array barcode representation
      */
-    protected function barcode_i25(string $code, bool $checksum = false)
+    protected function barcode_i25(string $code)
     {
-        $chr['0'] = '11221';
-        $chr['1'] = '21112';
-        $chr['2'] = '12112';
-        $chr['3'] = '22111';
-        $chr['4'] = '11212';
-        $chr['5'] = '21211';
-        $chr['6'] = '12211';
-        $chr['7'] = '11122';
-        $chr['8'] = '21121';
-        $chr['9'] = '12121';
-        $chr['A'] = '11';
-        $chr['Z'] = '21';
-        if ($checksum) {
-            // add checksum
+        if ($this->hasChecksum) {
             $code .= $this->checksum_s25($code);
         }
-        if (0 != (strlen($code) % 2)) {
-            // add leading zero if code-length is odd
+
+        // Add leading zero if code-length is odd
+        if ($this->isOdd(strlen($code))) {
             $code = '0'.$code;
         }
-        // add start and stop codes
-        $code = 'AA'.strtolower($code).'ZA';
 
-        $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
-        $k = 0;
-        $clen = strlen($code);
-        for ($i = 0; $i < $clen; $i = ($i + 2)) {
-            $char_bar = $code[$i];
-            $char_space = $code[$i + 1];
-            if (!isset($chr[$char_bar]) || !isset($chr[$char_space])) {
+        // Add start and stop codes
+        $code = self::START_CODE.strtolower($code).self::STOP_CODE;
+
+        $bar = $this->getBaseBar($code);
+        $iterator = 0;
+
+        for ($i = 0; $i < strlen($code); $i = ($i + 2)) {
+            $charBar = $code[$i];
+            $charSpace = $code[$i + 1];
+
+            if (!isset(self::CHARACTER[$charBar]) || !isset(self::CHARACTER[$charSpace])) {
                 throw new InvalidCharacterException();
             }
-            // create a bar-space sequence
-            $seq = '';
-            $chrlen = strlen($chr[$char_bar]);
-            for ($s = 0; $s < $chrlen; ++$s) {
-                $seq .= $chr[$char_bar][$s].$chr[$char_space][$s];
-            }
-            $seqlen = strlen($seq);
-            for ($j = 0; $j < $seqlen; ++$j) {
-                if (0 == ($j % 2)) {
-                    $t = true; // bar
-                } else {
-                    $t = false; // space
-                }
-                $w = $seq[$j];
-                $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
-                $bararray['maxw'] += $w;
-                ++$k;
+
+            $sequence = $this->getBarSpaceSequence($charBar, $charSpace);
+            for ($j = 0; $j < strlen($sequence); ++$j) {
+                $bar['bcode'][$iterator] = ['t' => $this->isEven($j), 'w' => $sequence[$j], 'h' => 1, 'p' => 0];
+                $bar['maxw'] += $sequence[$j];
+                ++$iterator;
             }
         }
 
-        return $bararray;
+        return $bar;
+    }
+
+    /**
+     * Get a Bar Space Sequence String.
+     *
+     * @param string $charBar
+     * @param string $charSpace
+     *
+     * @return string
+     */
+    private function getBarSpaceSequence(string $charBar, string $charSpace): string
+    {
+        $sequence = '';
+        for ($s = 0; $s < strlen(self::CHARACTER[$charBar]); ++$s) {
+            $sequence .= self::CHARACTER[$charBar][$s].self::CHARACTER[$charSpace][$s];
+        }
+
+        return $sequence;
     }
 }
