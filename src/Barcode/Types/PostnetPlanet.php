@@ -136,6 +136,13 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
         return self::BARLENGTH_DEFAULT[$firstLevel][$ssecondLevel];
     }
 
+    /**
+     * Get Custom Line Start Array
+     *
+     * @param integer $height
+     * @param float $point
+     * @return array
+     */
     private function getCustomLineStart(int $height, float $point): array
     {
         $line = self::LINE_START;
