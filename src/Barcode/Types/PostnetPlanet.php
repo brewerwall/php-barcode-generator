@@ -4,6 +4,42 @@ namespace Brewerwall\Barcode\Types;
 
 class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const MAXH = 2;
+
+    const MAXW_INCREMENT = 2;
+
+    const BARLENGTH_DEFAULT = [
+        0 => [2, 2, 1, 1, 1],
+        1 => [1, 1, 1, 2, 2],
+        2 => [1, 1, 2, 1, 2],
+        3 => [1, 1, 2, 2, 1],
+        4 => [1, 2, 1, 1, 2],
+        5 => [1, 2, 1, 2, 1],
+        6 => [1, 2, 2, 1, 1],
+        7 => [2, 1, 1, 1, 2],
+        8 => [2, 1, 1, 2, 1],
+        9 => [2, 1, 2, 1, 1],
+    ];
+
+    const BARLENGTH_PLANET = [
+        0 => [1, 1, 2, 2, 2],
+        1 => [2, 2, 2, 1, 1],
+        2 => [2, 2, 1, 2, 1],
+        3 => [2, 2, 1, 1, 2],
+        4 => [2, 1, 2, 2, 1],
+        5 => [2, 1, 2, 1, 2],
+        6 => [2, 1, 1, 2, 2],
+        7 => [1, 2, 2, 2, 1],
+        8 => [1, 2, 2, 1, 2],
+        9 => [1, 2, 1, 2, 2],
+    ];
+
+    const LINE_START = ['t' => 1, 'w' => 1, 'h' => 2, 'p' => 0];
+
+    const LINE_END = ['t' => 0, 'w' => 1, 'h' => 2, 'p' => 0];
+
+    const REMOVE_CHARACTERS = [' ', '-'];
+
     /** @var bool */
     protected $isPlanet;
 
@@ -21,81 +57,98 @@ class PostnetPlanet extends BarcodeTypeAbstract implements BarcodeTypeInterface
      */
     public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_postnet($code, $this->isPlanet));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_postnet($code));
     }
 
     /**
      * POSTNET and PLANET barcodes.
      * Used by U.S. Postal Service for automated mail sorting.
      *
-     * @param string $code   zip code to represent. Must be a string containing a zip code of the form DDDDD orDDDDD-DDDD.
-     * @param bool   $planet if true print the PLANET barcode, otherwise print POSTNET
+     * @param string $code zip code to represent. Must be a string containing a zip code of the form DDDDD orDDDDD-DDDD.
      *
      * @return array barcode representation
      */
-    protected function barcode_postnet(string $code, bool $planet = false): array
+    protected function barcode_postnet(string $code): array
     {
-        // bar length
-        if ($planet) {
-            $barlen = array(
-                0 => array(1, 1, 2, 2, 2),
-                1 => array(2, 2, 2, 1, 1),
-                2 => array(2, 2, 1, 2, 1),
-                3 => array(2, 2, 1, 1, 2),
-                4 => array(2, 1, 2, 2, 1),
-                5 => array(2, 1, 2, 1, 2),
-                6 => array(2, 1, 1, 2, 2),
-                7 => array(1, 2, 2, 2, 1),
-                8 => array(1, 2, 2, 1, 2),
-                9 => array(1, 2, 1, 2, 2),
-            );
-        } else {
-            $barlen = array(
-                0 => array(2, 2, 1, 1, 1),
-                1 => array(1, 1, 1, 2, 2),
-                2 => array(1, 1, 2, 1, 2),
-                3 => array(1, 1, 2, 2, 1),
-                4 => array(1, 2, 1, 1, 2),
-                5 => array(1, 2, 1, 2, 1),
-                6 => array(1, 2, 2, 1, 1),
-                7 => array(2, 1, 1, 1, 2),
-                8 => array(2, 1, 1, 2, 1),
-                9 => array(2, 1, 2, 1, 1),
-            );
-        }
-        $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 2, 'bcode' => array());
-        $k = 0;
-        $code = str_replace('-', '', $code);
-        $code = str_replace(' ', '', $code);
-        $len = strlen($code);
-        // calculate checksum
-        $sum = 0;
-        for ($i = 0; $i < $len; ++$i) {
-            $sum += intval($code[$i]);
-        }
-        $chkd = ($sum % 10);
-        if ($chkd > 0) {
-            $chkd = (10 - $chkd);
-        }
-        $code .= $chkd;
-        $len = strlen($code);
+        $bar = $this->getBaseBar($code, self::MAXH);
+
+        $iterator = 0;
+        $code = str_replace(self::REMOVE_CHARACTERS, '', $code);
+        $code .= $this->getCheckedValue($code);
+
         // start bar
-        $bararray['bcode'][$k++] = array('t' => 1, 'w' => 1, 'h' => 2, 'p' => 0);
-        $bararray['bcode'][$k++] = array('t' => 0, 'w' => 1, 'h' => 2, 'p' => 0);
-        $bararray['maxw'] += 2;
-        for ($i = 0; $i < $len; ++$i) {
+        $bar['bcode'][$iterator++] = self::LINE_START;
+        $bar['bcode'][$iterator++] = self::LINE_END;
+        $bar['maxw'] += self::MAXW_INCREMENT;
+
+        // fill bars
+        for ($i = 0; $i < strlen($code); ++$i) {
             for ($j = 0; $j < 5; ++$j) {
-                $h = $barlen[$code[$i]][$j];
-                $p = floor(1 / $h);
-                $bararray['bcode'][$k++] = array('t' => 1, 'w' => 1, 'h' => $h, 'p' => $p);
-                $bararray['bcode'][$k++] = array('t' => 0, 'w' => 1, 'h' => 2, 'p' => 0);
-                $bararray['maxw'] += 2;
+                $height = $this->getBarLengthValue($code[$i], $j);
+                $point = floor(1 / $height);
+                $bar['bcode'][$iterator++] = $this->getCustomLineStart($height, $point);
+                $bar['bcode'][$iterator++] = self::LINE_END;
+                $bar['maxw'] += self::MAXW_INCREMENT;
             }
         }
-        // end bar
-        $bararray['bcode'][$k++] = array('t' => 1, 'w' => 1, 'h' => 2, 'p' => 0);
-        ++$bararray['maxw'];
 
-        return $bararray;
+        // end bar
+        $bar['bcode'][$iterator++] = self::LINE_START;
+        ++$bar['maxw'];
+
+        return $bar;
+    }
+
+    /**
+     * Get the Checked value of the code.
+     *
+     * @param string $code
+     *
+     * @return int
+     */
+    private function getCheckedValue(string $code): int
+    {
+        $sum = array_reduce(str_split($code), function ($carry, $character) {
+            return $carry += (int)$character;
+        });
+
+        if ($checked = ($sum % 10) > 0) {
+            $checked = (10 - $checked);
+        }
+
+        return $checked;
+    }
+
+    /**
+     * Get Bar Length Value.
+     *
+     * @param int $firstLevel
+     * @param int $ssecondLevel
+     *
+     * @return int
+     */
+    private function getBarLengthValue(int $firstLevel, int $ssecondLevel): int
+    {
+        if ($this->isPlanet) {
+            return self::BARLENGTH_PLANET[$firstLevel][$ssecondLevel];
+        }
+
+        return self::BARLENGTH_DEFAULT[$firstLevel][$ssecondLevel];
+    }
+
+    /**
+     * Get Custom Line Start Array
+     *
+     * @param integer $height
+     * @param float $point
+     * @return array
+     */
+    private function getCustomLineStart(int $height, float $point): array
+    {
+        $line = self::LINE_START;
+        $line['h'] = $height;
+        $line['p'] = $point;
+
+        return $line;
     }
 }
