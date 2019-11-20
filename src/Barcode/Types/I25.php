@@ -71,18 +71,18 @@ class I25 extends BarcodeTypeAbstract implements BarcodeTypeInterface
         $bar = $this->getBaseBar($code);
         $iterator = 0;
 
-        for ($i = 0; $i < strlen($code); $i = ($i + 2)) {
-            $charBar = $code[$i];
-            $charSpace = $code[$i + 1];
+        for ($codeIndex = 0; $codeIndex < strlen($code); $codeIndex = ($codeIndex + 2)) {
+            $charBar = $code[$codeIndex];
+            $charSpace = $code[$codeIndex + 1];
 
             if (!isset(self::CHARACTER[$charBar]) || !isset(self::CHARACTER[$charSpace])) {
                 throw new InvalidCharacterException();
             }
 
             $sequence = $this->getBarSpaceSequence($charBar, $charSpace);
-            for ($j = 0; $j < strlen($sequence); ++$j) {
-                $bar['bcode'][$iterator] = ['t' => $this->isEven($j), 'w' => $sequence[$j], 'h' => 1, 'p' => 0];
-                $bar['maxw'] += $sequence[$j];
+            for ($sequenceIndex = 0; $sequenceIndex < strlen($sequence); ++$sequenceIndex) {
+                $bar['bcode'][$iterator] = ['t' => $this->isEven($sequenceIndex), 'w' => $sequence[$sequenceIndex], 'h' => 1, 'p' => 0];
+                $bar['maxw'] += $sequence[$sequenceIndex];
                 ++$iterator;
             }
         }
