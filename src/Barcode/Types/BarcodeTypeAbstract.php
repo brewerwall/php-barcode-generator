@@ -104,4 +104,28 @@ abstract class BarcodeTypeAbstract
 
         return $oldBarcodeArray;
     }
+
+    /**
+     * Determines if an Int is Even.
+     *
+     * @param int $value
+     *
+     * @return bool
+     */
+    protected function isEven(int $value): bool
+    {
+        return 0 === ($value % 2);
+    }
+
+    /**
+     * Determine if an Int is Odd.
+     *
+     * @param int $value
+     *
+     * @return bool
+     */
+    protected function isOdd(int $value): bool
+    {
+        return 1 === ($value % 2);
+    }
 }
