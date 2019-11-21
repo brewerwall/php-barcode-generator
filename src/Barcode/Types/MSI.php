@@ -6,6 +6,29 @@ use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
 
 class MSI extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const CHARACTER = [
+        '0' => '100100100100',
+        '1' => '100100100110',
+        '2' => '100100110100',
+        '3' => '100100110110',
+        '4' => '100110100100',
+        '5' => '100110100110',
+        '6' => '100110110100',
+        '7' => '100110110110',
+        '8' => '110100100100',
+        '9' => '110100100110',
+        'A' => '110100110100',
+        'B' => '110100110110',
+        'C' => '110110100100',
+        'D' => '110110100110',
+        'E' => '110110110100',
+        'F' => '110110110110',
+    ];
+
+    const SEQUENCE_LEFT_GUARD = '110';
+
+    const SEQUENCE_RIGHT_GUARD = '1001';
+
     /** @var bool */
     protected $hasChecksum;
 
@@ -23,7 +46,7 @@ class MSI extends BarcodeTypeAbstract implements BarcodeTypeInterface
      */
     public function generate(string $code): array
     {
-        return $this->convertBarcodeArrayToNewStyle($this->barcode_msi($code, $this->hasChecksum));
+        return $this->convertBarcodeArrayToNewStyle($this->barcode_msi($code));
     }
 
     /**
@@ -31,59 +54,73 @@ class MSI extends BarcodeTypeAbstract implements BarcodeTypeInterface
      * Variation of Plessey code, with similar applications
      * Contains digits (0 to 9) and encodes the data only in the width of bars.
      *
-     * @param string $code     code to represent
-     * @param bool   $checksum if true add a checksum to the code (modulo 11)
+     * @param string $code code to represents
      *
      * @return array barcode representation
      */
-    protected function barcode_msi(string $code, bool $checksum = false): array
+    protected function barcode_msi(string $code): array
     {
-        $chr['0'] = '100100100100';
-        $chr['1'] = '100100100110';
-        $chr['2'] = '100100110100';
-        $chr['3'] = '100100110110';
-        $chr['4'] = '100110100100';
-        $chr['5'] = '100110100110';
-        $chr['6'] = '100110110100';
-        $chr['7'] = '100110110110';
-        $chr['8'] = '110100100100';
-        $chr['9'] = '110100100110';
-        $chr['A'] = '110100110100';
-        $chr['B'] = '110100110110';
-        $chr['C'] = '110110100100';
-        $chr['D'] = '110110100110';
-        $chr['E'] = '110110110100';
-        $chr['F'] = '110110110110';
-        if ($checksum) {
-            // add checksum
-            $clen = strlen($code);
-            $p = 2;
-            $check = 0;
-            for ($i = ($clen - 1); $i >= 0; --$i) {
-                $check += (hexdec($code[$i]) * $p);
-                ++$p;
-                if ($p > 7) {
-                    $p = 2;
-                }
-            }
-            $check %= 11;
-            if ($check > 0) {
-                $check = 11 - $check;
-            }
-            $code .= $check;
+        if ($this->hasChecksum) {
+            $code = $this->getChecksumCode($code);
         }
-        $seq = '110'; // left guard
-        $clen = strlen($code);
-        for ($i = 0; $i < $clen; ++$i) {
-            $digit = $code[$i];
-            if (!isset($chr[$digit])) {
-                throw new InvalidCharacterException('Char '.$digit.' is unsupported');
-            }
-            $seq .= $chr[$digit];
-        }
-        $seq .= '1001'; // right guard
-        $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 
-        return $this->binarySequenceToArray($seq, $bararray);
+        return $this->binarySequenceToArray($this->getSequence($code), $this->getBaseBar($code));
+    }
+
+    /**
+     * Gets the sequence of the code.  Wraps the sub-sequence in guards.
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    private function getSequence(string $code): string
+    {
+        return self::SEQUENCE_LEFT_GUARD.$this->getSubSequence($code).self::SEQUENCE_RIGHT_GUARD;
+    }
+
+    /**
+     * Gets the sub-sequence of the code.
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    private function getSubSequence(string $code): string
+    {
+        $sequence = '';
+        foreach (str_split($code) as $character) {
+            if (!isset(self::CHARACTER[$character])) {
+                throw new InvalidCharacterException('Char '.$character.' is unsupported');
+            }
+            $sequence .= self::CHARACTER[$character];
+        }
+
+        return $sequence;
+    }
+
+    /**
+     * Get Checksum Code.
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    private function getChecksumCode(string $code): string
+    {
+        $p = 2;
+        $check = 0;
+        for ($codeIndex = (strlen($code) - 1); $codeIndex >= 0; --$codeIndex) {
+            $check += (hexdec($code[$codeIndex]) * $p++);
+            if ($p > 7) {
+                $p = 2;
+            }
+        }
+        $check %= 11;
+        if ($check % 11 > 0) {
+            $check = 11 - $check;
+        }
+
+        return $code.$check;
     }
 }
