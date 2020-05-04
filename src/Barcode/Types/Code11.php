@@ -6,6 +6,21 @@ use Brewerwall\Barcode\Exceptions\InvalidCharacterException;
 
 class Code11 extends BarcodeTypeAbstract implements BarcodeTypeInterface
 {
+    const CHR = [
+        '0' => '111121',
+        '1' => '211121',
+        '2' => '121121',
+        '3' => '221111',
+        '4' => '112121',
+        '5' => '212111',
+        '6' => '122111',
+        '7' => '111221',
+        '8' => '211211',
+        '9' => '211111',
+        '-' => '112111',
+        'S' => '112211',
+    ];
+
     /**
      * Generate the Code11 data.
      *
@@ -28,20 +43,6 @@ class Code11 extends BarcodeTypeAbstract implements BarcodeTypeInterface
      */
     protected function barcode_code11(string $code): array
     {
-        $chr = array(
-            '0' => '111121',
-            '1' => '211121',
-            '2' => '121121',
-            '3' => '221111',
-            '4' => '112121',
-            '5' => '212111',
-            '6' => '122111',
-            '7' => '111221',
-            '8' => '211211',
-            '9' => '211111',
-            '-' => '112111',
-            'S' => '112211',
-        );
         $bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
         $k = 0;
         $w = 0;
@@ -92,10 +93,10 @@ class Code11 extends BarcodeTypeAbstract implements BarcodeTypeInterface
         $code = 'S'.$code.'S';
         $len += 3;
         for ($i = 0; $i < $len; ++$i) {
-            if (!isset($chr[$code[$i]])) {
+            if (!isset(self::CHR[$code[$i]])) {
                 throw new InvalidCharacterException('Char '.$code[$i].' is unsupported');
             }
-            $seq = $chr[$code[$i]];
+            $seq = self::CHR[$code[$i]];
             for ($j = 0; $j < 6; ++$j) {
                 if (0 == ($j % 2)) {
                     $t = true; // bar
